@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    //форматируем наего юзера в спрингового юзера(имя, пароль, роль)
+    
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
                 user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
-    //берет пачку ролей и делает такую же пачку для авторитиес
+    
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
