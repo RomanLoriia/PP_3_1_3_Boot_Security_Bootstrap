@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -36,12 +36,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
-    public void addRole(Role role) {
-        if (this.roles == null) {
-            this.roles = new ArrayList<>();
-        }
-        this.roles.add(role);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
